@@ -90,14 +90,14 @@ public class Phone{
 	}
 	
 	public void insert(Session session,XBag bag) {
-		phone_number = (String) bag.getMap().get(BagKey.PHONE_NUMBER);
+		phone_number = (String) bag.getValue(BagKey.PHONE_NUMBER);
 		cust_id = getCustomer(session,bag);
 		session.save(this);
 	}
 	
 	public void update(Session session,XBag bag) {
 		Phone updated1 = this.get(session,bag);
-		updated1.setPhone_number((String) bag.getMap().get(BagKey.PHONE_NUMBER));
+		updated1.setPhone_number((String) bag.getValue(BagKey.PHONE_NUMBER));
 		updated1.setCust(getCustomer(session,bag));
 		session.update(updated1);
 	}
@@ -108,15 +108,15 @@ public class Phone{
 	}
 	
 	public Customer getCustomer(Session session, XBag bag) {
-		if(bag.getMap().get(BagKey.CUSTOMER_ID) != null) {
-			return (Customer) session.load(Customer.class, (Serializable) bag.getMap().get(BagKey.CUSTOMER_ID));
+		if(bag.getValue(BagKey.CUSTOMER_ID) != null) {
+			return (Customer) session.load(Customer.class, (Serializable) bag.getValue(BagKey.CUSTOMER_ID));
 		}
 		return null;
 	}
 	
 	public Phone get(Session session, XBag bag) {
-		if(bag.getMap().get(BagKey.PHONE_ID)!= null) {
-			return (Phone) session.load(Phone.class, (Serializable) bag.getMap().get(BagKey.PHONE_ID));
+		if(bag.getValue(BagKey.PHONE_ID)!= null) {
+			return (Phone) session.load(Phone.class, (Serializable) bag.getValue(BagKey.PHONE_ID));
 		}
 		return null;
 	}

@@ -75,17 +75,17 @@ public class Customer{
 	}
 	
 	public void insert(Session session,XBag bag) {
-		name = (String) bag.getMap().get(BagKey.CUSTOMER_NAME);
-		surname = (String) bag.getMap().get(BagKey.CUSTOMER_SURNAME);
-		email = (String) bag.getMap().get(BagKey.CUSTOMER_EMAIL);
+		name = (String) bag.getValue(BagKey.CUSTOMER_NAME);
+		surname = (String) bag.getValue(BagKey.CUSTOMER_SURNAME);
+		email = (String) bag.getValue(BagKey.CUSTOMER_EMAIL);
 		session.save(this);
 	}
 	
 	public void update(Session session,XBag bag) {
 		Customer updated1 = this.get(session,bag);
-		updated1.setName( (String) bag.getMap().get(BagKey.CUSTOMER_NAME));
-		updated1.setSurname( (String) bag.getMap().get(BagKey.CUSTOMER_SURNAME));
-		updated1.setEmail((String) bag.getMap().get(BagKey.CUSTOMER_EMAIL));
+		updated1.setName( (String) bag.getValue(BagKey.CUSTOMER_NAME));
+		updated1.setSurname( (String) bag.getValue(BagKey.CUSTOMER_SURNAME));
+		updated1.setEmail((String) bag.getValue(BagKey.CUSTOMER_EMAIL));
 		session.update(updated1);
 	}
 	
@@ -104,8 +104,8 @@ public class Customer{
 	}
 	
 	public Customer get(Session session, XBag bag) {
-		if(bag.getMap().get(BagKey.CUSTOMER_ID) != null) {
-			return (Customer) session.load(Customer.class, (Serializable) bag.getMap().get(BagKey.CUSTOMER_ID));
+		if(bag.getValue(BagKey.CUSTOMER_ID) != null) {
+			return (Customer) session.load(Customer.class, (Serializable) bag.getValue(BagKey.CUSTOMER_ID));
 		}
 		return null;
 	}

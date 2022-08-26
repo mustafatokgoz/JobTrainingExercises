@@ -8,11 +8,9 @@ import org.hibernate.cfg.Configuration;
 
 import com.mustafa.trial.bags.BagKey;
 import com.mustafa.trial.bags.XBag;
-import com.mustafa.trial.entity.Account;
-import com.mustafa.trial.entity.Address;
+
 import com.mustafa.trial.entity.Commands;
 import com.mustafa.trial.entity.Customer;
-import com.mustafa.trial.entity.Phone;
  
 
 public class AppTest extends TestCase {
@@ -78,20 +76,20 @@ public class AppTest extends TestCase {
 		
 		
 		XBag bag = new XBag();
-		bag.getMap().put(BagKey.CUSTOMER_NAME, "Mustafa");
-		bag.getMap().put(BagKey.CUSTOMER_SURNAME, "TOKGOZ");
-		bag.getMap().put(BagKey.CUSTOMER_EMAIL, "mustafa@tokgoz.com");
+		bag.put(BagKey.CUSTOMER_NAME, "Mustafa");
+		bag.put(BagKey.CUSTOMER_SURNAME, "TOKGOZ");
+		bag.put(BagKey.CUSTOMER_EMAIL, "mustafa@tokgoz.com");
 		
 		CommandExecuter exec = new CommandExecuter();
 		
 		
 		exec.execute("customer->insert", session,bag);
 		
-		bag.getMap().put(BagKey.CUSTOMER_ID, 1L);
+		bag.put(BagKey.CUSTOMER_ID, 1L);
 		
 		//exec.execute("customer->delete", session, bag);
 		
-		bag.getMap().put(BagKey.CUSTOMER_SURNAME, "TOKZ");
+		bag.put(BagKey.CUSTOMER_SURNAME, "TOKZ");
 		
 		exec.execute("customer->update", session, bag);
 		
@@ -99,29 +97,29 @@ public class AppTest extends TestCase {
 		
 		XBag bag2 = new XBag();
 		
-		bag2.getMap().put(BagKey.CUSTOMER_ID, 1L);
+		bag2.put(BagKey.CUSTOMER_ID, 1L);
 		Customer obj = (Customer) exec.execute("customer->get", session, bag2);
 		
 		System.out.println(obj);
 		
-		bag2.getMap().put(BagKey.PHONE_NUMBER, "Mustafa");
+		bag2.put(BagKey.PHONE_NUMBER, "Mustafa");
 		
 		
 		exec.execute("phone->insert", session, bag2);
 		
-		bag2.getMap().put(BagKey.PHONE_NUMBER, "0xxxxxxxx");
-		bag2.getMap().put(BagKey.PHONE_ID, 1L);
+		bag2.put(BagKey.PHONE_NUMBER, "0xxxxxxxx");
+		bag2.put(BagKey.PHONE_ID, 1L);
 		
 		
 		exec.execute("phone->update", session, bag2);
 		
 	
-		bag2.getMap().put(BagKey.ADDRESS_ADDRESS,"Orhanagazi");
+		bag2.put(BagKey.ADDRESS_ADDRESS,"Orhanagazi");
 		
 		exec.execute("address->insert", session, bag2);
 		
-		bag2.getMap().put(BagKey.ACCOUNT_NUMBER,"44444");
-		bag2.getMap().put(BagKey.ACCOUNT_AMOUNT,1000);
+		bag2.put(BagKey.ACCOUNT_NUMBER,"44444");
+		bag2.put(BagKey.ACCOUNT_AMOUNT,1000);
 		
 		exec.execute("account->insert", session, bag2);
 		

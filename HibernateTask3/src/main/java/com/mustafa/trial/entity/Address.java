@@ -73,14 +73,14 @@ public class Address {
 
 	
 	public void insert(Session session,XBag bag) {
-		address = (String) bag.getMap().get(BagKey.ADDRESS_ADDRESS);
+		address = (String) bag.getValue(BagKey.ADDRESS_ADDRESS);
 		cust_id = getCustomer(session,bag);
 		session.save(this);
 	}
 	
 	public void update(Session session,XBag bag) {
 		Address updated1 = this.get(session,bag);
-		updated1.setAddress((String) bag.getMap().get(BagKey.ADDRESS_ADDRESS));
+		updated1.setAddress((String) bag.getValue(BagKey.ADDRESS_ADDRESS));
 		updated1.setCust(getCustomer(session,bag));
 		session.update(updated1);
 	}
@@ -91,15 +91,15 @@ public class Address {
 	}
 	
 	public Customer getCustomer(Session session, XBag bag) {
-		if(bag.getMap().get(BagKey.CUSTOMER_ID) != null) {
-			return (Customer) session.load(Customer.class, (Serializable) bag.getMap().get(BagKey.CUSTOMER_ID));
+		if(bag.getValue(BagKey.CUSTOMER_ID) != null) {
+			return (Customer) session.load(Customer.class, (Serializable) bag.getValue(BagKey.CUSTOMER_ID));
 		}
 		return null;
 	}
 	
 	public Address get(Session session, XBag bag) {
-		if(bag.getMap().get(BagKey.ADDRESS_ID)!= null) {
-			return (Address) session.load(Phone.class, (Serializable) bag.getMap().get(BagKey.ADDRESS_ID));
+		if(bag.getValue(BagKey.ADDRESS_ID)!= null) {
+			return (Address) session.load(Phone.class, (Serializable) bag.getValue(BagKey.ADDRESS_ID));
 		}
 		return null;
 	}

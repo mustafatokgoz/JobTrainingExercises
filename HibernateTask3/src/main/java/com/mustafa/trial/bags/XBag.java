@@ -14,5 +14,12 @@ public class XBag{
 		this.map = map;
 	}
 	
+	public Object getValue(BagKey key) {
+		return map.get(key);
+	}
+	
+	public void put(BagKey key,Object value) {
+		map.put(key, value);
+	}
 	
 }

@@ -93,16 +93,16 @@ public class Account extends BaseOperations{
 	}
 	
 	public void insert(Session session,XBag bag) {
-		account_number = (String) bag.getMap().get(BagKey.ACCOUNT_NUMBER);
-		amount = (Integer) bag.getMap().get(BagKey.ACCOUNT_AMOUNT);
+		account_number = (String) bag.getValue(BagKey.ACCOUNT_NUMBER);
+		amount = (Integer) bag.getValue(BagKey.ACCOUNT_AMOUNT);
 		cust_id = getCustomer(session,bag);
 		session.save(this);
 	}
 	
 	public void update(Session session,XBag bag) {
 		Account updated1 = this.get(session,bag);
-		updated1.setAccount_number((String) bag.getMap().get(BagKey.ACCOUNT_NUMBER));
-		updated1.setAmount((Integer) bag.getMap().get(BagKey.ACCOUNT_AMOUNT));
+		updated1.setAccount_number((String) bag.getValue(BagKey.ACCOUNT_NUMBER));
+		updated1.setAmount((Integer) bag.getValue(BagKey.ACCOUNT_AMOUNT));
 		updated1.setCust(getCustomer(session,bag));
 		session.update(updated1);
 	}
@@ -113,15 +113,15 @@ public class Account extends BaseOperations{
 	}
 	
 	public Customer getCustomer(Session session, XBag bag) {
-		if(bag.getMap().get(BagKey.CUSTOMER_ID) != null) {
-			return (Customer) session.load(Customer.class, (Serializable) bag.getMap().get(BagKey.CUSTOMER_ID));
+		if(bag.getValue(BagKey.CUSTOMER_ID) != null) {
+			return (Customer) session.load(Customer.class, (Serializable) bag.getValue(BagKey.CUSTOMER_ID));
 		}
 		return null;
 	}
 	
 	public Account get(Session session, XBag bag) {
-		if(bag.getMap().get(BagKey.ACCOUNT_ID)!= null) {
-			return (Account) session.load(Phone.class, (Serializable) bag.getMap().get(BagKey.ACCOUNT_ID));
+		if(bag.getValue(BagKey.ACCOUNT_ID)!= null) {
+			return (Account) session.load(Phone.class, (Serializable) bag.getValue(BagKey.ACCOUNT_ID));
 		}
 		return null;
 	}
