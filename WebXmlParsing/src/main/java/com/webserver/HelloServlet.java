@@ -129,7 +129,7 @@ public class HelloServlet extends HttpServlet {
 	          if (tempNode.getNodeType() == Node.ELEMENT_NODE) {
 
 	              // get node name and value
-	        	  // This code taken from https://mkyong.com/java/how-to-read-xml-file-in-java-dom-parser/
+	        	 
 	              System.out.println("\nNode Name =" + tempNode.getNodeName() + " [OPEN]");
 	             
 	              System.out.println("Node Value =" + tempNode.getTextContent());
